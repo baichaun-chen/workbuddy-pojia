@@ -1,0 +1,11 @@
+# 部署临时文件
+*.pojia-bak
+.uploadtmp/
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 日志
+*.log
