@@ -58,10 +58,22 @@ for %%f in ("%TPL%\*.tpl") do (
     )
 )
 
+rem ---- 确定模板源目录（支持自定义路径参数）----
+set "SRC=%~dp0templates"
+if not "%~1"=="" (
+    if exist "%~1" (
+        set "SRC=%~1"
+        echo [信息] 使用自定义模板目录: %~1
+    ) else (
+        echo [警告] 指定的模板目录不存在: %~1
+        echo        回退到默认 templates 目录。
+    )
+)
+
 rem ---- 覆盖写入破甲模板 ----
 echo [部署] 正在写入破甲模板...
 set "count=0"
-for %%f in ("%~dp0templates\*.tpl") do (
+for %%f in ("%SRC%\*.tpl") do (
     copy /y "%%f" "%TPL%\" >nul
     set /a count+=1
 )
